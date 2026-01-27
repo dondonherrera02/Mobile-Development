@@ -86,13 +86,12 @@ fun LogoNameTitleScreen(modifier: Modifier = Modifier) {
                 .size(120.dp)
                 .background(DarkBlue)
         )
-        Spacer(modifier = Modifier.height(8.dp))
         Text(
             text = stringResource(R.string.firstname_lastname),
             fontSize = 41.sp,
-            fontWeight = FontWeight.Light
+            fontWeight = FontWeight.Light,
+            modifier = Modifier.padding(top = 8.dp)
         )
-        Spacer(modifier = Modifier.height(4.dp))
         Text(
             text = stringResource(R.string.job_title),
             fontSize = 14.sp,
@@ -144,11 +143,12 @@ fun ContactInfoCard(logo: Painter, detail: String, modifier: Modifier = Modifier
             modifier = Modifier.size(24.dp),
             colorFilter = ColorFilter.tint(DarkGreen)
         )
-        Spacer(modifier = Modifier.width(12.dp))
         Text(
             text = detail,
             fontSize = 12.sp,
-            modifier = Modifier.width(150.dp)
+            modifier = Modifier
+                .padding(start = 16.dp)
+                .width(150.dp)
         )
     }
 }
