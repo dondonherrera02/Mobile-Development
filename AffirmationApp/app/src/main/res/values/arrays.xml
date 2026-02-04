@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<resources>
+
+    <string-array name="affirmations">
+        <item>@string/affirmation1</item>
+        <item>@string/affirmation2</item>
+        <item>@string/affirmation3</item>
+        <item>@string/affirmation4</item>
+        <item>@string/affirmation5</item>
+        <item>@string/affirmation6</item>
+        <item>@string/affirmation7</item>
+        <item>@string/affirmation8</item>
+        <item>@string/affirmation9</item>
+        <item>@string/affirmation10</item>
+    </string-array>
+
+    <array name="affirmation_images">
+        <item>@drawable/image1</item>
+        <item>@drawable/image2</item>
+        <item>@drawable/image3</item>
+        <item>@drawable/image4</item>
+        <item>@drawable/image5</item>
+        <item>@drawable/image6</item>
+        <item>@drawable/image7</item>
+        <item>@drawable/image8</item>
+        <item>@drawable/image9</item>
+        <item>@drawable/image10</item>
+    </array>
+
+</resources>
