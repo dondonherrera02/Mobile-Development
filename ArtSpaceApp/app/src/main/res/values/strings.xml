@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    strings.xml - Centralized string resources.
+
+    Best Practice: NEVER hardcode strings in your Kotlin/Composable code.
+    - Keep ALL text here in strings.xml
+    - This enables easy LOCALIZATION (translate to other languages by adding
+      res/values-es/strings.xml for Spanish, res/values-fr/strings.xml for French, etc.)
+    - Use stringResource(R.string.my_string) in Compose to access these
+-->
+<resources>
+    <!-- App name -->
+    <string name="app_name">Art Space</string>
+
+    <!-- Navigation buttons -->
+    <string name="button_previous">Previous</string>
+    <string name="button_next">Next</string>
+
+    <!--
+        Artwork 1 - Replace with your own artwork details!
+        The image file should be placed in res/drawable/ as artwork_1.jpg (or .png)
+    -->
+    <string name="artwork_1_title">Sailing Under the Bridge</string>
+    <string name="artwork_1_artist">Kat Ryan</string>
+    <string name="artwork_1_year">2021</string>
+
+    <!-- Artwork 2 -->
+    <string name="artwork_2_title">Still Life of Blue Rose and Other Flowers</string>
+    <string name="artwork_2_artist">Owen Scott</string>
+    <string name="artwork_2_year">2019</string>
+
+    <!-- Artwork 3 -->
+    <string name="artwork_3_title">Forest at Dusk</string>
+    <string name="artwork_3_artist">Maria Chen</string>
+    <string name="artwork_3_year">2020</string>
+
+    <!-- Artwork 4 -->
+    <string name="artwork_4_title">Mountain Reflections</string>
+    <string name="artwork_4_artist">James Park</string>
+    <string name="artwork_4_year">2022</string>
+
+    <!-- Artwork 5 -->
+    <string name="artwork_5_title">Ocean at Dawn</string>
+    <string name="artwork_5_artist">Elena Rossi</string>
+    <string name="artwork_5_year">2023</string>
+
+    <!-- Accessibility descriptions
+         Best Practice: Provide separate content descriptions for accessibility.
+         Distinguish between decorative images (contentDescription = null) and
+         meaningful images (contentDescription = descriptive string).
+    -->
+    <string name="artwork_image_description">Artwork: %1$s by %2$s</string>
+</resources>

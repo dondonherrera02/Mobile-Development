@@ -11,7 +11,6 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -49,7 +48,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.woofapp.data.Dog
 import com.example.woofapp.data.dogs
 import com.example.woofapp.ui.theme.WoofAppTheme
-import androidx.compose.ui.graphics.Color
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,14 +63,14 @@ class MainActivity : ComponentActivity() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun WoofTopAppBar(){
+fun WoofTopAppBar() {
     CenterAlignedTopAppBar(
         title = {
             Row(
                 verticalAlignment = Alignment.CenterVertically
-            ){
+            ) {
                 Image(
-                    painter=painterResource(R.drawable.ic_woof_logo),
+                    painter = painterResource(R.drawable.ic_woof_logo),
                     contentDescription = null,
                     modifier = Modifier
                         .size(dimensionResource(R.dimen.image_size))
@@ -85,7 +83,6 @@ fun WoofTopAppBar(){
             }
         }
     )
-
 }
 
 @Composable
@@ -94,14 +91,13 @@ fun WoofApp() {
         modifier = Modifier.fillMaxSize(),
         topBar = {
             WoofTopAppBar()
-        }) { innerPadding ->
-        LazyColumn(contentPadding = innerPadding) // LazyColumn in Kotlin (Jetpack Compose) is a scrollable list that only creates items that you can see on the screen. It doesn’t create all the items at once, which makes it faster and uses less memory.
-        {
-            items(dogs){
+        }
+    ) { innerPadding ->
+        LazyColumn(contentPadding = innerPadding) {
+            items(dogs) {
                 DogItem(
                     dog = it,
-                    modifier = Modifier.
-                    padding(dimensionResource(R.dimen.padding_small))
+                    modifier = Modifier.padding(dimensionResource(R.dimen.padding_small))
                 )
             }
         }
@@ -125,6 +121,8 @@ fun DogItem(
 
     Card(
         modifier = modifier,
+        // ✅ M3 medium shape applied to Card (12.dp rounded corners)
+        shape = MaterialTheme.shapes.medium,
         colors = CardDefaults.cardColors(
             containerColor = color
         )
@@ -164,20 +162,20 @@ fun DogItem(
     }
 }
 
-
 @Composable
 fun DogHobby(
-    @StringRes dogHobby:Int,
-    modifier: Modifier=Modifier
-){
-    Column(modifier=modifier){
+    @StringRes dogHobby: Int,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
         Text(
             text = "About:",
             style = MaterialTheme.typography.labelSmall
         )
         Text(
-            text= stringResource(dogHobby),
-            style = MaterialTheme.typography.bodyLarge)
+            text = stringResource(dogHobby),
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
 }
 
@@ -185,27 +183,28 @@ fun DogHobby(
 fun DogInformation(
     @StringRes dogName: Int,
     dogAge: Int
-){
-    Column()
-    {
+) {
+    Column {
         Text(
             text = stringResource(dogName),
-            style = MaterialTheme.typography.displayMedium)
+            style = MaterialTheme.typography.displayMedium
+        )
         Text(
-            text= stringResource(R.string.years_old, dogAge),
-            style = MaterialTheme.typography.bodyLarge)
+            text = stringResource(R.string.years_old, dogAge),
+            style = MaterialTheme.typography.bodyLarge
+        )
     }
-
 }
 
 @Composable
 fun DogIcon(
-    @DrawableRes dogIcon:Int
-){
+    @DrawableRes dogIcon: Int
+) {
     Image(
         modifier = Modifier
             .size(dimensionResource(R.dimen.image_size))
             .padding(dimensionResource(R.dimen.padding_small))
+            // ✅ M3 small shape applied to DogIcon (8.dp rounded corners)
             .clip(MaterialTheme.shapes.small),
         painter = painterResource(dogIcon),
         contentScale = ContentScale.Crop,
@@ -215,14 +214,12 @@ fun DogIcon(
 
 @Composable
 fun DogItemButton(
-    expanded:Boolean,
-    onClick:()->Unit
-){
-    IconButton(
-        onClick = onClick
-    ){
+    expanded: Boolean,
+    onClick: () -> Unit
+) {
+    IconButton(onClick = onClick) {
         Icon(
-            imageVector = if(expanded) Icons.Filled.KeyboardArrowUp
+            imageVector = if (expanded) Icons.Filled.KeyboardArrowUp
             else Icons.Filled.KeyboardArrowDown,
             contentDescription = null,
             tint = MaterialTheme.colorScheme.error
