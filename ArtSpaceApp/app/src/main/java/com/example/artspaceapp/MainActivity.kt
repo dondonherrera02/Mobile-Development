@@ -55,11 +55,8 @@ data class Artwork(
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //enableEdgeToEdge()
         setContent {
             ArtSpaceAppTheme {
-                // Surface is the Material Design root container.
-                // It handles background color, elevation, and shapes consistently.
                 Surface(modifier = Modifier.fillMaxSize()) {
                     ArtSpaceApp()
                 }
@@ -94,22 +91,16 @@ fun ArtSpaceApp() {
     }
 
     var currentIndex by remember { mutableIntStateOf(0) }
-
-    // Compute the current artwork from the list using the index
     val currentArtwork = artworks[currentIndex]
 
-    // Pass state DOWN to the screen, and lambda callbacks UP for events
     ArtSpaceScreen(
         artwork = currentArtwork,
         currentIndex = currentIndex,
         totalCount = artworks.size,
         onPreviousClick = {
-            // Wrap-around logic: go to last item if at the beginning
-            // Best Practice: Use floorMod for safe negative modulo in Kotlin
             currentIndex = Math.floorMod(currentIndex - 1, artworks.size)
         },
         onNextClick = {
-            // Wrap-around logic: go to first item if at the end
             currentIndex = (currentIndex + 1) % artworks.size
         }
     )
@@ -128,28 +119,24 @@ fun ArtSpaceScreen(
             .fillMaxSize()
             .padding(16.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.SpaceBetween  // Push content + buttons to opposite ends
+        verticalArrangement = Arrangement.SpaceBetween
     ) {
 
         Spacer(modifier = Modifier.height(24.dp))
 
-        // ── Artwork Wall (Image + Frame) ──────────────────────────────────────
         ArtworkWall(artwork = artwork)
 
-        // ── Artwork Description Card ──────────────────────────────────────────
         ArtworkDescriptor(
             artwork = artwork,
             currentIndex = currentIndex,
             totalCount = totalCount
         )
 
-        // ── Navigation Buttons ────────────────────────────────────────────────
         DisplayController(
             onPreviousClick = onPreviousClick,
             onNextClick = onNextClick
         )
 
-        // Bottom spacer for breathing room above navigation bar
         Spacer(modifier = Modifier.height(16.dp))
     }
 }
@@ -157,13 +144,12 @@ fun ArtSpaceScreen(
 @Composable
 fun ArtworkWall(
     artwork: Artwork,
-    modifier: Modifier = Modifier  // Best Practice: Always add a modifier parameter for flexibility
+    modifier: Modifier = Modifier
 ) {
-    // Card provides Material Design elevation + rounded corners (the "frame" effect)
     Card(
         modifier = modifier
             .fillMaxWidth()
-            .aspectRatio(3f / 4f)  // Maintains consistent 3:4 portrait ratio regardless of screen size
+            .aspectRatio(3f / 4f)
             .padding(horizontal = 8.dp)
             .shadow(
                 elevation = 5.dp,
@@ -177,17 +163,13 @@ fun ArtworkWall(
         Box(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(20.dp),  // Inner padding creates the "frame" border effect
+                .padding(20.dp),
             contentAlignment = Alignment.Center
         ) {
             Image(
                 painter = painterResource(id = artwork.imageRes),
-                // Best Practice: ALWAYS provide a meaningful contentDescription for accessibility.
-                // Screen readers (TalkBack) use this to describe images to visually impaired users.
                 contentDescription = stringResource(id = artwork.titleRes),
                 modifier = Modifier.fillMaxSize(),
-                // ContentScale.Fit ensures the entire image is visible without cropping
-                // Use ContentScale.Crop if you want to fill the space (may crop edges)
                 contentScale = ContentScale.Fit
             )
         }
@@ -211,11 +193,8 @@ fun ArtworkDescriptor(
             .padding(horizontal = 20.dp, vertical = 16.dp),
         horizontalAlignment = Alignment.Start
     ) {
-        // Artwork title
         Text(
             text = stringResource(id = artwork.titleRes),
-            // Best Practice: Use MaterialTheme.typography for consistent, scalable text styles.
-            // These styles automatically adapt for different device font size settings.
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
             color = MaterialTheme.colorScheme.onSecondaryContainer
@@ -223,7 +202,6 @@ fun ArtworkDescriptor(
 
         Spacer(modifier = Modifier.height(4.dp))
 
-        // Artist name + year on the same row
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(
                 text = stringResource(id = artwork.artistRes),
@@ -240,7 +218,6 @@ fun ArtworkDescriptor(
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        // Position counter: "2 of 5"
         Text(
             text = "${currentIndex + 1} of $totalCount",
             style = MaterialTheme.typography.labelMedium,
@@ -260,14 +237,12 @@ fun DisplayController(
         modifier = modifier
             .fillMaxWidth()
             .padding(horizontal = 8.dp),
-        horizontalArrangement = Arrangement.SpaceBetween,  // Push buttons to opposite sides
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        // Previous button
-        // Best Practice: Use OutlinedButton for secondary actions, Button for primary actions
         OutlinedButton(
             onClick = onPreviousClick,
-            modifier = Modifier.weight(1f)  // weight(1f) makes both buttons share space equally
+            modifier = Modifier.weight(1f)
         ) {
             Text(
                 text = stringResource(R.string.button_previous),
@@ -303,7 +278,7 @@ fun ArtSpaceScreenPreview() {
                 yearRes = R.string.artwork_1_year
             ),
             currentIndex = 0,
-            totalCount = 5,
+            totalCount = 3,
             onPreviousClick = {},
             onNextClick = {}
         )
