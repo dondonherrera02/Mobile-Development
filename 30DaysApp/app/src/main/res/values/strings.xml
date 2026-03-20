@@ -1,0 +1,9 @@
+<resources>
+    <!-- App name shown on the launcher icon and in the task switcher -->
+    <string name="app_name">30 Days Developer</string>
+
+    <!-- Accessibility / content description strings -->
+    <string name="tip_image_description">Illustration for tip of the day</string>
+    <string name="expand_tip">Expand tip</string>
+    <string name="collapse_tip">Collapse tip</string>
+</resources>
